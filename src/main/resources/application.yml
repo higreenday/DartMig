@@ -1,0 +1,49 @@
+
+com:
+  first:
+    dart:
+      job_cron: "*/15 * * * * ?"
+      job_period: 500000
+      job_delay: 1000
+      path:
+        audit: #감사보고서
+          receive: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive
+          receive_err: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_err
+          receive_ok: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_ok
+          receive_ok_folder: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_ok
+          receive_ok_ext: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_ok
+        business : #사업보고서
+          receive: /Users/higreenday/mdev/mir_project/dart/mig/business/receive
+          receive_err: /Users/higreenday/mdev/mir_project/dart/mig/business/receive_err
+          receive_ok: /Users/higreenday/mdev/mir_project/dart/mig/business/receive_ok
+          receive_ok_ext: /Users/higreenday/mdev/mir_project/dart/mig/business/receive_ok
+        pub : #공시
+          receive: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive
+          receive_err: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive_err
+          receive_ok: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive_ok
+          receive_ok_ext: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive_ok
+        
+spring:
+  main:
+    web-application-type: none
+    allow-bean-definition-overriding: true
+  application:
+    name: DartXmlToDB
+  aop :
+    proxy-target-class : true
+  datasource :
+    url : jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11
+    username : tuser
+    password : tuser01..
+    driver-class-name : oracle.jdbc.driver.OracleDriver
+    hikari:
+      connection-test-query: select 1 from dual
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate 
+      use-new-id-generator-mappings: false
+    generate-ddl: false
+    database: ORACLE
+    show-sql: true
+     

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<DOCUMENT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="dart3.xsd">
+
+<DOCUMENT-HEADER AEXT-CLASS="N">
+<DOCUMENT-NAME ACODE="80621">기업집단현황공시(분기-개별회사용)</DOCUMENT-NAME>
+<FORMULA-VERSION ADATE="20171113">1.9</FORMULA-VERSION>
+<COMPANY-NAME AREGCIK="01154919">하이마린에이치이호주식회사</COMPANY-NAME>
+</DOCUMENT-HEADER>
+
+<BODY>
+
+<INSERTION ABASISNUMBER="SE1" AFREQUENCY="0" ADUPLICATION="N">
+<COMMENT>◆click◆ 정정문서 작성시 『정오표』 삽입</COMMENT>
+<LIBRARYLIST>정정신고(보고).LCommon</LIBRARYLIST>
+</INSERTION>
+
+<COVER>
+<COVER-TITLE ATOC="Y" AASSOCNOTE="COVER">대규모기업집단 소속회사에 대한 현황 공시</COVER-TITLE>
+<P></P>
+
+<TABLE ACLASS="NORMAL" WIDTH="600" BORDER="0">
+
+<COLGROUP>
+<COL WIDTH="158"></COL>
+<COL WIDTH="424"></COL>
+</COLGROUP>
+
+<TBODY ALIGN="LEFT" VALIGN="TOP">
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32"></TD>
+<TD WIDTH="433" HEIGHT="32"></TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32">기업집단명 :</TD>
+<TD WIDTH="433" HEIGHT="32">농협</TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32"></TD>
+<TD WIDTH="433" HEIGHT="32"></TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32">기업집단 동일인 :</TD>
+<TD WIDTH="433" HEIGHT="32">농협중앙회</TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32"></TD>
+<TD WIDTH="433" HEIGHT="32"></TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32">기업집단 대표회사 :</TD>
+<TD WIDTH="433" HEIGHT="32">농협경제지주(주)</TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32"></TD>
+<TD WIDTH="433" HEIGHT="32"></TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32">작성회사 :</TD>
+<TD WIDTH="433" HEIGHT="32">하이마린에이치이호주식회사</TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32">담당자 :</TD>
+<TD WIDTH="433" HEIGHT="32">김 상 수 (과장), 전화번호(02-3210-3333)</TD>
+</TR>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD WIDTH="167" HEIGHT="32"></TD>
+<TD WIDTH="433" HEIGHT="32"></TD>
+</TR>
+</TBODY>
+</TABLE>
+<P></P>
+
+<TABLE ACLASS="NORMAL" WIDTH="600" BORDER="1" AFIXTABLE="N">
+
+<COLGROUP>
+<COL WIDTH="591"></COL>
+</COLGROUP>
+
+<TBODY ALIGN="LEFT" VALIGN="TOP">
+
+<TR ACOPY="Y" ADELETE="Y">
+
+<TD WIDTH="600" HEIGHT="122">
+
+<P>&lt;참조&gt;&amp;cr;
+<A REFNO="20180227000186">농협 기업집단현황 공시의 대표회사는 농협경제지주 주식회사이며 농협 기업집단의 &amp;cr;전체현황 공시는 대표회사 농협경제지주 주식회사가 제출한 농협 기업집단현황 공시와 동일하므로 농협경제지주 주식회사가 제출한 농협 기업집단 현황 공시를 참조하시기 바랍니다.</A>
+</P>
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+<PGBRK></PGBRK>
+</COVER>
+
+<SECTION-1 ACLASS="MANDATORY" APARTSOURCE="SOURCE">
+<TITLE ATOC="Y">3. 주식소유현황</TITLE>
+<P></P>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-3-2-0">(2) 국내 계열회사간 주식소유현황</TITLE>
+<P>해당사항 없음&amp;cr;</P>
+<PGBRK></PGBRK>
+</SECTION-2>
+</SECTION-1>
+
+<SECTION-1 ACLASS="MANDATORY" APARTSOURCE="SOURCE">
+<TITLE ATOC="Y">4. 계열회사와 특수관계인간 거래현황</TITLE>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-1-0">(1) 계열회사간 자금거래 현황</TITLE>
+<P USERMARK=" U">가. 계열회사로부터 자금차입현황</P>
+<P>해당사항 없음&amp;cr;</P>
+<P USERMARK=" U">나. 당좌차월 약정한도</P>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-2-0">(2) 특수관계인에 대한 자금대여 현황</TITLE>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-3-0">(3) 계열회사간 유가증권거래 현황</TITLE>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-4-0">(4) 특수관계인에 대한 유가증권거래 현황</TITLE>
+<P USERMARK=" U">가. 유가증권 매도거래</P>
+<P>해당사항 없음&amp;cr;</P>
+<P USERMARK=" U">나. 유가증권 매입거래</P>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-6-0">(6) 계열회사간 주요 상품ㆍ용역거래 내역</TITLE>
+<P USERMARK=" U">가. 상장회사와 그 계열회사간 주요 상품ㆍ용역거래 내역 (분기)</P>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-7-0">(7) 계열회사간 기타자산거래 현황</TITLE>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-8-0">(8) 특수관계인에 대한 기타자산거래 현황</TITLE>
+<P USERMARK=" U">가. 기타자산 매도 등 거래</P>
+<P>해당사항 없음&amp;cr;</P>
+<P USERMARK=" U">나. 기타자산 매입 등 거래</P>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-10-0">(10) 계열회사간 채무보증 현황</TITLE>
+<P USERMARK=" U">가. 공정거래법상 제한되는 채무보증</P>
+<P>해당사항 없음&amp;cr;</P>
+<P USERMARK=" U">나. 공정거래법상 제한되는 채무보증 이외의 채무보증</P>
+<P>해당사항 없음&amp;cr;</P>
+<P USERMARK=" U">다. 이행보증ㆍ납세보증 등</P>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-4-11-0">(11) 계열회사간 담보제공 현황</TITLE>
+<P USERMARK=" U">가. 계열회사 간 담보제공 내역</P>
+<P>해당사항 없음&amp;cr;</P>
+<P USERMARK=" U">나. 계열회사에게 제공한 담보 내역 중 건설업을 영위하는 법인의 담보제공 내역</P>
+<P>해당사항 없음&amp;cr;</P>
+</SECTION-2>
+</SECTION-1>
+
+<SECTION-1 ACLASS="MANDATORY" APARTSOURCE="SOURCE">
+<TITLE ATOC="Y">5. 순환출자 현황</TITLE>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-5-2-0">(2) 국내 계열회사간 순환출자 변동 내역</TITLE>
+<P USERMARK=" U">가. 국내 계열회사 간 순환출자 변동내역 (소속회사용)</P>
+<P>해당사항 없음&amp;cr;</P>
+<P>                                                 &lt;세부 변동내역(전기대비)&gt;</P>
+
+<TABLE ACLASS="NORMAL" WIDTH="720" BORDER="0" AFIXTABLE="N">
+
+<COLGROUP>
+<COL WIDTH="711"></COL>
+</COLGROUP>
+
+<TBODY ALIGN="LEFT" VALIGN="TOP">
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD ALIGN="RIGHT" VALIGN="MIDDLE" WIDTH="720" HEIGHT="30">(단위: 백만원)</TD>
+</TR>
+</TBODY>
+</TABLE>
+
+<TABLE BORDER="1" WIDTH="719" ACLASS="NORMAL" AFIXTABLE="N">
+
+<COLGROUP>
+<COL WIDTH="111"></COL>
+<COL WIDTH="111"></COL>
+<COL WIDTH="111"></COL>
+<COL WIDTH="111"></COL>
+<COL WIDTH="111"></COL>
+<COL WIDTH="110"></COL>
+</COLGROUP>
+
+<THEAD ALIGN="LEFT" VALIGN="TOP">
+
+<TR ACOPY="Y" ADELETE="Y">
+<TH ALIGN="CENTER" ACOPYCOL="Y" ADELETECOL="Y" AMOVECOL="N" WIDTH="120" HEIGHT="30">순번</TH>
+<TH ALIGN="CENTER" ACOPYCOL="Y" ADELETECOL="Y" AMOVECOL="N" WIDTH="120" HEIGHT="30">구분</TH>
+<TH ALIGN="CENTER" ACOPYCOL="Y" ADELETECOL="Y" AMOVECOL="N" WIDTH="120" HEIGHT="30">변동사유</TH>
+<TH ALIGN="CENTER" ACOPYCOL="Y" ADELETECOL="Y" AMOVECOL="N" WIDTH="120" HEIGHT="30">취득(처분)가액</TH>
+<TH ALIGN="CENTER" ACOPYCOL="Y" ADELETECOL="Y" AMOVECOL="N" WIDTH="120" HEIGHT="30">변동시점</TH>
+<TH ALIGN="CENTER" ACOPYCOL="Y" ADELETECOL="Y" AMOVECOL="N" WIDTH="119" HEIGHT="30">유예기간</TH>
+</TR>
+</THEAD>
+
+<TBODY>
+
+<TR ACOPY="Y" ADELETE="Y">
+<TD ALIGN="CENTER" WIDTH="719" HEIGHT="30" COLSPAN="6">해당사항없음</TD>
+</TR>
+</TBODY>
+</TABLE>
+<P></P>
+</SECTION-2>
+</SECTION-1>
+
+<SECTION-1 ACLASS="MANDATORY" APARTSOURCE="SOURCE">
+<TITLE ATOC="Y">7. 금융ㆍ보험사 의결권 행사 현황</TITLE>
+
+<SECTION-2 ACLASS="MANDATORY">
+<TITLE ATOC="Y" AASSOCNOTE="D-0-7-1-0">(1) 금융ㆍ보험사의 국내계열회사주식에 대한 의결권 행사 현황</TITLE>
+<P>해당사항 없음</P>
+</SECTION-2>
+</SECTION-1>
+</BODY>
+</DOCUMENT>
