@@ -36,58 +36,19 @@ public class DartTbPaDartDocBodyEntity implements Serializable {
     private String pbrbk;
     
     @Column(name="pbrbk_anumber")
-    private String pbrbkAnumber;
+    private String pbrbkAnumber; 
     
-    @Column(name="cover_title")
-    private String coverTitle;
+    @Column(name="correction_content_sn")
+    private int correctionContentSn;
     
-    @Column(name="cover_title_aclass")
-    private String coverTitleAclass;
+    @Column(name="cover_content_sn")
+    private int coverContentSn;
     
-    @Column(name="cover_title_atoc")
-    private String coverTitleAtoc;
+    @Column(name="toc_content_sn")
+    private int tocContentSn;
     
-    @Column(name="cover_title_aassocnote")
-    private String coverTitleAassocnote;
-    
-    @Column(name="cover_title_aunit")
-    private String coverTitleAunit;
-    
-    @Column(name="cover_title_aunitvalue")
-    private String coverTitleAunitvalue;
-    
-    @Column(name="correction_sn")
-    private int correctionSn;
-    
-    @Column(name="cover_title_pgbrk")
-    private String coverTitlePgbrk;
-    
-    @Column(name="cover_title_pgbrk_anumber")
-    private String coverTitlePgbrkAnumber;
-    
-    @Column(name="toc_title")
-    private String tocTitle;
-    
-    @Column(name="toc_title_aclass")
-    private String tocTitleAclass;
-    
-    @Column(name="toc_title_atoc")
-    private String tocTitleAtoc;
-    
-    @Column(name="toc_title_aassocnote")
-    private String tocTitleAassocnote;
-    
-    @Column(name="toc_title_aunit")
-    private String tocTitleAunit;
-    
-    @Column(name="toc_title_aunitvalue")
-    private String tocTitleAunitvalue;
-    
-    @Column(name="toc_pgbrk")
-    private String tocPgbrk;
-    
-    @Column(name="toc_pgbrk_anumber")
-    private String tocPgbrkAnumber;
+    @Column(name="content_sn")
+    private int contentSn;
     
     @Column(name="appendix_atype")
     private String appendixAtype;

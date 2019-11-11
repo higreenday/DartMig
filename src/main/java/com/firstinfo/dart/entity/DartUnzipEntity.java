@@ -19,6 +19,7 @@ import lombok.ToString;
 public class DartUnzipEntity {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger("biz");
 
+    String fileNm;
     String dataSeCode;
     String sendDe;
     String dataSn;
@@ -48,7 +49,7 @@ public class DartUnzipEntity {
     
     public DartUnzipEntity(String dataSeCode, File[] files, String dirPath) throws Exception {
         this.dataSeCode = dataSeCode;
-        String fileNm = (new File(dirPath)).getName();
+        this.fileNm = (new File(dirPath)).getName();
         this.sendDe = fileNm.substring(0,8).trim();
         this.dataSn = fileNm.substring(8,13).trim();
         this.mrktSe = fileNm.substring(13,14).trim();

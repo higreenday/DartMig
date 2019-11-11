@@ -55,7 +55,7 @@ public class DartMig {
     @Transactional(rollbackFor=Exception.class)
     public void mig(DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt) throws Exception {
 
-        // TODO: 필요시 기존 자료 삭제 처리? 필요할까?
+        // TODO: 필요시 기존 자료 삭제 처리? 필요없어보임
         
         // master 테이블 저장
         DartTbPaDartMasterEntity masterEnt = regTbPaDartMaster(dartEntity, histEnt);
@@ -78,40 +78,6 @@ public class DartMig {
         dartTbPaDartDocHeader.xmlToDb(xdoc, dartEntity, histEnt, masterEnt);
         dartTbPaDartBody.xmlToDb(xdoc, dartEntity, histEnt, masterEnt);
         
-        
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-//        Document xdoc = documentBuilder.parse(xmlFile.getAbsolutePath());
-//        dartTbPaDartDocHeader.xmlToDb(xdoc, dartEntity, histEnt, masterEnt);
-        
-//        DOCUMENT doc = getXmlToObject(xmlFile.getAbsolutePath());
-        
-//  
-//        CD.bizlog.info(doc.getDOCUMENTHEADER().getDOCUMENTNAME().getValue()); 
-//        List<Object> coverSubElmList1 = doc.getBODY().getCover().getCOVERTITLEOrWARNINGOrTABLE();
-//        for(Object obj : coverSubElmList1) {
-//            if (obj instanceof CoverTitleType) {
-//                System.out.println(((CoverTitleType)obj).getValue());
-//            } else if (obj instanceof TableType) {
-//                System.out.println(((TableType)obj));
-//            }
-//        }
-//  
-//        List<JAXBElement<?>> bodySubElmList = doc.getBODY().getCORRECTIONOrPGBRKOrINSERTION();
-//        for(JAXBElement<?> elm : bodySubElmList) {
-//            if (elm.getName().toString().equals("COVER")) {
-//                System.out.println(getXmlString(elm));
-//                JAXBElement<CoverType> coverElm = (JAXBElement<CoverType>)elm;
-//                List<Object> coverSubElmList = coverElm.getValue().getCOVERTITLEOrWARNINGOrTABLE();
-//                for(Object obj : coverSubElmList) {
-//                    if (obj instanceof CoverTitleType) {
-//                        System.out.println(((CoverTitleType)obj).getValue());
-//                    } else if (obj instanceof TableType) {
-//                        System.out.println(((TableType)obj));
-//                    }
-//                }
-//            }
-//        }
     }
     
     public DartTbPaDartMasterEntity regTbPaDartMaster(DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt) throws Exception {

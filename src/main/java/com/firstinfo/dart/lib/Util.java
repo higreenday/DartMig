@@ -32,7 +32,7 @@ public class Util {
         zis.closeEntry();
         zis.close(); 
         
-        DartUnzipEntity dartUnzipEntity = new DartUnzipEntity(dataSeCode, destDir.listFiles(), destDir.getAbsolutePath()); 
+        DartUnzipEntity dartUnzipEntity = new DartUnzipEntity(dataSeCode, destDir.listFiles(), destDir.getAbsolutePath());  
         return dartUnzipEntity;
     }
     

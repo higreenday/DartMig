@@ -1,14 +1,18 @@
 package com.firstinfo.dart.lib;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.filter.Filters;
@@ -17,6 +21,7 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
+import org.xml.sax.InputSource;
 
 import com.firstinfo.dart.entity.DartUnzipEntity;
 
@@ -26,7 +31,12 @@ public class XMLUtil {
     public static Document loadXmlDocument(String xmlPath) throws Exception {
         Document doc = null;
         SAXBuilder builder = new SAXBuilder();
-        return builder.build(xmlPath);
+        String xml = FileUtils.readFileToString(new File(xmlPath), "utf-8");
+//        return builder.build(xmlPath); 
+        return builder.build(new InputSource(new ByteArrayInputStream(xml.getBytes("utf-8"))));
+//        InputSource inputSource = new InputSource(new StringReader(xmlPath));
+//        inputSource.setEncoding("UTF-8"); 
+//        return builder.build(inputSource);
     }   
 
     public static String getXmlString(Document doc) throws Exception {
@@ -37,6 +47,24 @@ public class XMLUtil {
     public static String getXmlString(Element elm) throws Exception {
         XMLOutputter xmlout = new XMLOutputter(Format.getPrettyFormat());
         return xmlout.outputString(elm);
+    }
+
+    public static String getContentsFromElem(Element elm, String removeChildNode) throws Exception {
+        Element cloneElem = elm.clone();
+        cloneElem.removeChild(removeChildNode);
+        cloneElem.removeChild("FILENAME");
+        cloneElem.removeChild("PART");
+        cloneElem.removeChild("SECTION-1");
+        cloneElem.removeChild("SECTION-2");
+        cloneElem.removeChild("SECTION-3");
+        cloneElem.removeChild("SECTION-4");
+        cloneElem.removeChild("SECTION-5");
+        cloneElem.removeChild("SECTION-6");
+        cloneElem.removeChild("CORRECTION");
+        cloneElem.removeChild("PGBRK");
+        cloneElem.removeChild("INSERTION"); 
+        XMLOutputter xmlout = new XMLOutputter(Format.getPrettyFormat());
+        return xmlout.outputString(cloneElem.getChildren());
     }
     
     public static Element getSelectSingleNode(String xpath, Document doc) throws Exception {

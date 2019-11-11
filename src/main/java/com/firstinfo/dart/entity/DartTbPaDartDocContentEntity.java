@@ -21,12 +21,42 @@ public class DartTbPaDartDocContentEntity implements Serializable {
 
     @Id
     @Column(name="content_sn")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TB_PA_DART_DOC_CONTENT_SEQ")
-    @SequenceGenerator(name="TB_PA_DART_DOC_CONTENT_SEQ", sequenceName="TB_PA_DART_DOC_CONTENT_SEQ") 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_TB_PA_DART_DOC_CONTENT")
+    @SequenceGenerator(name="SEQ_TB_PA_DART_DOC_CONTENT", sequenceName="SEQ_TB_PA_DART_DOC_CONTENT") 
     private int contentSn;
-     
+ 
+    @Column(name="jurirno", length=13, nullable=false) 
+    private String jurirno; 
+ 
+    @Column(name="data_se_code", length=1, nullable=false, columnDefinition="CHAR")
+    private String dataSeCode;
+ 
+    @Column(name="pblntf_data_sn")
+    int pblntfDataSn; 
+    
     @Column(name="title")
     private String title;
+    
+    @Column(name="title_aclass")
+    private String titleAclass;
+    
+    @Column(name="title_atoc")
+    private String titleAtoc;
+    
+    @Column(name="title_aassocnote")
+    private String titleAassocnote;
+    
+    @Column(name="title_aunit")
+    private String titleAunit;
+    
+    @Column(name="title_aunitvalue")
+    private String titleAunitvalue;
+    
+    @Column(name="pgbrk")
+    private String pgbrk;
+    
+    @Column(name="pgbrk_anumber")
+    private String pgbrkAnumber;
 
     @Column(name="content", columnDefinition="CLOB")
     private String content;

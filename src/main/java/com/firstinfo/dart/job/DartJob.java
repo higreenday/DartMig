@@ -67,6 +67,9 @@ public class DartJob {
 
     @Value("${com.first.dart.path.pub.receive_ok_ext}")
     private String dartReceiveOkExtPubPath;
+
+    @Value("${com.first.dart.path.prod}")
+    private String isProdYn;
     
     //@Scheduled(cron ="${com.first.dart.job_cron}")
     @Scheduled(fixedRateString ="${com.first.dart.job_period}", initialDelayString="${com.first.dart.job_delay}")
@@ -102,26 +105,33 @@ public class DartJob {
                         // 마이그레이션 시작 디비 저장
                         DartUnzipEntity dartUnzipEntity = Util.getDartEntity(migSeCode, receiveFile);
                         dartUnzipEntity.validate(); 
+                        histEnt.setRecptnPblntfName(receiveFile.getName());
                         dartTbPaDartMigHistRepository.save(histEnt);
                         
                         dartMig.mig(dartUnzipEntity, histEnt);
                         
                         histEnt.setMigResultCode("1");
-                        //FileUtils.moveFile(receiveFile, new File(dartReceiveOkPath + "/" + receiveFile.getName()));
-                        //FileUtils.moveDirectory(new File(dartReceivePath + "/" + extractFolderNm), new File(dartReceiveOkExtPath + "/" + extractFolderNm));
+                        if (isProdYn.equals("Y")) {
+                            FileUtils.moveFile(receiveFile, new File(dartReceiveOkPath + "/" + receiveFile.getName()));
+                            FileUtils.moveDirectory(new File(dartReceivePath + "/" + extractFolderNm), new File(dartReceiveOkExtPath + "/" + extractFolderNm));
+                        }
                         CD.bizlog.info(migSeGbn + " MIG SUCCESS : " + receiveFile.getName());
                     } catch (CustException ex) {
                         histEnt.setMigResultCode("0");
                         histEnt.setErrorCn(ExceptionUtils.getFullStackTrace(ex));
                         CD.bizlog.info(migSeGbn + " MIG ERROR : " + receiveFile.getName() +"\n" + ExceptionUtils.getFullStackTrace(ex));
-                        //FileUtils.moveFile(receiveFile, new File(dartReceiveErrPath + "/" + receiveFile.getName()));
-                        //FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
+                        if (isProdYn.equals("Y")) {
+                            FileUtils.moveFile(receiveFile, new File(dartReceiveErrPath + "/" + receiveFile.getName()));
+                            FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
+                        }
                     } catch (Exception ex) {
                         histEnt.setMigResultCode("0");
                         histEnt.setErrorCn(ExceptionUtils.getFullStackTrace(ex));
                         CD.bizlog.info(migSeGbn + " MIG ERROR : " + receiveFile.getName() +"\n" + ExceptionUtils.getFullStackTrace(ex));
-                        //FileUtils.moveFile(receiveFile, new File(dartReceiveErrPath + "/" + receiveFile.getName()));
-                        //FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
+                        if (isProdYn.equals("Y")) {
+                            FileUtils.moveFile(receiveFile, new File(dartReceiveErrPath + "/" + receiveFile.getName()));
+                            FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
+                        }
                     } finally { 
                         // 마이그레이션 결과 디비 저장
                         dartTbPaDartMigHistRepository.save(histEnt);

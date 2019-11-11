@@ -21,8 +21,8 @@ public class DartTbPaDartMigHistEntity implements Serializable {
 
         @Id
         @Column(name="mig_hist_sn")
-        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TB_PA_DART_MIG_HIST_SEQ")
-        @SequenceGenerator(name="TB_PA_DART_MIG_HIST_SEQ", sequenceName="TB_PA_DART_MIG_HIST_SEQ") 
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_TB_PA_DART_MIG_HIST")
+        @SequenceGenerator(name="SEQ_TB_PA_DART_MIG_HIST", sequenceName="SEQ_TB_PA_DART_MIG_HIST") 
         private int migHistSn;
         
         @Column(name="mig_se_code", length=1, nullable=false, columnDefinition="CHAR")

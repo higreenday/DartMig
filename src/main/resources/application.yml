@@ -10,7 +10,6 @@ com:
           receive: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive
           receive_err: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_err
           receive_ok: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_ok
-          receive_ok_folder: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_ok
           receive_ok_ext: /Users/higreenday/mdev/mir_project/dart/mig/audit/receive_ok
         business : #사업보고서
           receive: /Users/higreenday/mdev/mir_project/dart/mig/business/receive
@@ -22,7 +21,10 @@ com:
           receive_err: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive_err
           receive_ok: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive_ok
           receive_ok_ext: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive_ok
-        
+        rest : # rest migration
+          work_path: /Users/higreenday/mdev/mir_project/dart/mig/pub/receive
+      prod: N # Y 로 할 경우 마이그레이션 파일 삭제 및 ok, err폴더로 파일 이동 처리 , N일 경우 테스트를 위해 파일 이동 안함
+      
 spring:
   main:
     web-application-type: none
@@ -32,16 +34,22 @@ spring:
   aop :
     proxy-target-class : true
   datasource :
-    url : jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11
+#    url : jdbc:Altibase://220.76.91.27:20301/gongsidb
+#    username : gongsi
+#    password : gongsi
+#    driver-class-name : Altibase.jdbc.driver.AltibaseDriver
+#    url : jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11
+    url : jdbc:log4jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11 
     username : tuser
     password : tuser01..
-    driver-class-name : oracle.jdbc.driver.OracleDriver
+    driver-class-name : net.sf.log4jdbc.sql.jdbcapi.DriverSpy  
+#    driver-class-name : oracle.jdbc.driver.OracleDriver
     hikari:
       connection-test-query: select 1 from dual
   
   jpa:
     hibernate:
-      ddl-auto: validate 
+      ddl-auto: none 
       use-new-id-generator-mappings: false
     generate-ddl: false
     database: ORACLE
