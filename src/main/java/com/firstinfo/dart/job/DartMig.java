@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocSubFileEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMasterEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMigHistEntity;
 import com.firstinfo.dart.entity.DartTbPaDartReceiptEntity;
@@ -30,6 +31,7 @@ import com.firstinfo.dart.job.xml.DartTbPaDartBody;
 import com.firstinfo.dart.job.xml.DartTbPaDartDocHeader;
 import com.firstinfo.dart.lib.XMLUtil;
 import com.firstinfo.dart.repo.DartTbPaDartDocRepository;
+import com.firstinfo.dart.repo.DartTbPaDartDocSubFileRepository;
 import com.firstinfo.dart.repo.DartTbPaDartMasterRepository;
 import com.firstinfo.dart.repo.DartTbPaDartReceiptRepository;
 
@@ -41,6 +43,9 @@ public class DartMig {
 
     @Autowired
     DartTbPaDartDocRepository dartTbPaDartDocRepository;
+
+    @Autowired
+    DartTbPaDartDocSubFileRepository dartTbPaDartDocSubFileRepository;
 
     @Autowired
     DartTbPaDartReceiptRepository dartTbPaDartReceiptRepository;
@@ -55,8 +60,6 @@ public class DartMig {
     @Transactional(rollbackFor=Exception.class)
     public void mig(DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt) throws Exception {
 
-        // TODO: 필요시 기존 자료 삭제 처리? 필요없어보임
-        
         // master 테이블 저장
         DartTbPaDartMasterEntity masterEnt = regTbPaDartMaster(dartEntity, histEnt);
         
@@ -66,17 +69,27 @@ public class DartMig {
         // receipt 테이블 저장
         DartTbPaDartReceiptEntity receiptEnt = regTbPaDartReceipt(dartEntity, histEnt, masterEnt);
         
-        File xmlFile = dartEntity.getMainXmlFile();
-        
-        // xml validation 체크
-        boolean isValidXml = xmlValidation(xmlFile.getAbsolutePath()); 
-        if (isValidXml == false) {
-            throw new CustException(String.format("[%s]XML이 유효하지 않습니다.", xmlFile.getName()));
+        for(int i=0; i < dartEntity.getXmlCnt(); i++) {
+
+            File xmlFile = dartEntity.getMainXmlFile(i);
+            DartTbPaDartDocEntity docEnt = null;
+            for(int j=0; j < docEntArr.size(); j++) {
+                if (docEntArr.get(j).getFileNm().equalsIgnoreCase(xmlFile.getName())) {
+                    docEnt = docEntArr.get(j);
+                    break;
+                }
+            }
+            
+            // xml validation 체크
+            boolean isValidXml = xmlValidation(xmlFile.getAbsolutePath()); 
+            if (isValidXml == false) {
+                throw new CustException(String.format("[%s]XML이 유효하지 않습니다.", xmlFile.getName()));
+            }
+            
+            Document xdoc = XMLUtil.loadXmlDocument(xmlFile.getAbsolutePath());
+            dartTbPaDartDocHeader.xmlToDb(xdoc, dartEntity, histEnt, docEnt);
+            dartTbPaDartBody.xmlToDb(xdoc, dartEntity, histEnt, docEnt); 
         }
-        
-        Document xdoc = XMLUtil.loadXmlDocument(xmlFile.getAbsolutePath());
-        dartTbPaDartDocHeader.xmlToDb(xdoc, dartEntity, histEnt, masterEnt);
-        dartTbPaDartBody.xmlToDb(xdoc, dartEntity, histEnt, masterEnt);
         
     }
     
@@ -113,7 +126,7 @@ public class DartMig {
             docEnt.setJurirno(dartEntity.getReceiptJurirno());
             docEnt.setDataSeCode(dartEntity.getDataSeCode());
             docEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
-            docEnt.setAtchFileSn(i+1);
+            docEnt.setAtchFileSn(i);
             docEnt.setReprtTy(docArr[0].trim());
             docEnt.setPblntfCmpnyEsntlNo(docArr[1].trim());
             docEnt.setRefrnAt(docArr[2].trim());
@@ -124,6 +137,21 @@ public class DartMig {
             docEnt.setFileNm(docArr[7].trim());
             docEntArr.add(docEnt);
             dartTbPaDartDocRepository.save(docEnt);
+            if (docArr.length > 7) {
+                for(int j=0; j < ((docArr.length-7)/2); j++) {
+                    // 서브 파일 목록 저장
+                    String fileNm = docArr[8+(j*2)].split("\\")[1];
+                    String folderNm = docArr[8+(j*2)].split("\\")[0];
+                    DartTbPaDartDocSubFileEntity subFileEnt = new DartTbPaDartDocSubFileEntity();
+                    subFileEnt.setJurirno(dartEntity.getReceiptJurirno());
+                    subFileEnt.setDataSeCode(dartEntity.getDataSeCode());
+                    subFileEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+                    subFileEnt.setAtchFileSn(docEnt.getAtchFileSn());
+                    subFileEnt.setFileNm(fileNm);
+                    subFileEnt.setFolderNm(folderNm);
+                    dartTbPaDartDocSubFileRepository.save(subFileEnt);
+                }
+            }
         }
         return docEntArr;
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMasterEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMigHistEntity;
@@ -25,14 +26,15 @@ public class DartTbPaDartCover {
     DartTbPaDartDocContentRepository dartTbPaDartDocContentRepository;
 
     
-    public int xmlToDb(Element coverElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public int xmlToDb(Element coverElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         
         String xmlStr = XMLUtil.getContentsFromElem(coverElm, "COVER-TITLE");
         DartTbPaDartDocContentEntity coverContEnt = new DartTbPaDartDocContentEntity();
 
-        coverContEnt.setJurirno(masterEnt.getJurirno());
-        coverContEnt.setDataSeCode(masterEnt.getDataSeCode());
-        coverContEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        coverContEnt.setJurirno(docEnt.getJurirno());
+        coverContEnt.setDataSeCode(docEnt.getDataSeCode());
+        coverContEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        coverContEnt.setAtchFileSn(docEnt.getAtchFileSn());
         
         coverContEnt.setTitle(XMLUtil.getChildText("COVER-TITLE", coverElm));
         coverContEnt.setTitleAclass(XMLUtil.getChildAttrStr("COVER-TITLE", "ACLASS", coverElm));

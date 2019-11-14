@@ -31,6 +31,9 @@ public class DartTbPaDartDocBodyEntity implements Serializable {
     @Id
     @Column(name="pblntf_data_sn")
     int pblntfDataSn; 
+    @Id
+    @Column(name="atch_file_sn")
+    int atchFileSn; 
     
     @Column(name="pbrbk")
     private String pbrbk;

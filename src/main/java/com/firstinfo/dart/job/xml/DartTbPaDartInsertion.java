@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstLibEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocPartEntity;
@@ -33,13 +34,14 @@ public class DartTbPaDartInsertion {
     @Autowired
     DartTbPaDartInsertionLibrary dartTbPaDartInsertionLibrary;
     
-    public DartTbPaDartDocInstEntity xmlToDb(Element instElm, DartTbPaDartDocInstEntity pInstEnt, DartTbPaDartDocInstLibEntity instLibEnt, DartTbPaDartDocPartEntity partEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public DartTbPaDartDocInstEntity xmlToDb(Element instElm, DartTbPaDartDocInstEntity pInstEnt, DartTbPaDartDocInstLibEntity instLibEnt, DartTbPaDartDocPartEntity partEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
 
         DartTbPaDartDocInstEntity instEnt = new DartTbPaDartDocInstEntity();
         
-        instEnt.setJurirno(masterEnt.getJurirno());
-        instEnt.setDataSeCode(masterEnt.getDataSeCode());
-        instEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        instEnt.setJurirno(docEnt.getJurirno());
+        instEnt.setDataSeCode(docEnt.getDataSeCode());
+        instEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        instEnt.setAtchFileSn(docEnt.getAtchFileSn());
 
         if (pInstEnt != null) {
             instEnt.setPInsertionSn(pInstEnt.getInsertionSn());
@@ -64,7 +66,7 @@ public class DartTbPaDartInsertion {
         if (instElm.getChild("LIBRARY") != null) {
             List<Element> libraryList = instElm.getChildren("LIBRARY");
             for(Element libElem : libraryList) {
-                dartTbPaDartInsertionLibrary.xmlToDb(libElem, instEnt, xdoc, dartEntity, histEnt, masterEnt);
+                dartTbPaDartInsertionLibrary.xmlToDb(libElem, instEnt, xdoc, dartEntity, histEnt, docEnt);
             }
         }
         return instEnt;

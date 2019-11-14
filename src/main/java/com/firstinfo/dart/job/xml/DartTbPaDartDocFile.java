@@ -7,6 +7,7 @@ import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocFileEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocHeaderEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstLibEntity;
@@ -25,7 +26,7 @@ public class DartTbPaDartDocFile {
     DartTbPaDartDocFileRepository dartTbPaDartDocFileRepository;
 
     
-    public void xmlToDb(List<Element> fileNameList, DartTbPaDartDocInstLibEntity instLibEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public void xmlToDb(List<Element> fileNameList, DartTbPaDartDocInstLibEntity instLibEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         
         for(Element fileElm : fileNameList) {
             DartTbPaDartDocFileEntity fileEnt = new DartTbPaDartDocFileEntity();

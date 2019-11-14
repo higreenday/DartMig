@@ -72,7 +72,7 @@ public class DartMigRest {
     @Value("${com.first.dart.path.pub.receive_ok_ext}")
     private String dartReceiveOkExtPubPath;
 
-    @Value("${com.first.dart.path.prod}")
+    @Value("${com.first.dart.prod}")
     private String isProdYn;
     
     /**

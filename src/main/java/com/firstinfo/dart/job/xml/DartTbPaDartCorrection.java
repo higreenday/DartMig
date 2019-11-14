@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMasterEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMigHistEntity;
@@ -25,14 +26,15 @@ public class DartTbPaDartCorrection {
     DartTbPaDartDocContentRepository dartTbPaDartDocContentRepository;
 
     
-    public int xmlToDb(Element corrElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public int xmlToDb(Element corrElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
          
         DartTbPaDartDocContentEntity corrContEnt = new DartTbPaDartDocContentEntity();            
         String xmlStr = XMLUtil.getContentsFromElem(corrElm, "TITLE");
 
-        corrContEnt.setJurirno(masterEnt.getJurirno());
-        corrContEnt.setDataSeCode(masterEnt.getDataSeCode());
-        corrContEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        corrContEnt.setJurirno(docEnt.getJurirno());
+        corrContEnt.setDataSeCode(docEnt.getDataSeCode());
+        corrContEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        corrContEnt.setAtchFileSn(docEnt.getAtchFileSn());
         
         corrContEnt.setTitle(XMLUtil.getChildText("TITLE", corrElm));
         corrContEnt.setContent(xmlStr);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMasterEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMigHistEntity;
@@ -58,15 +59,16 @@ public class DartTbPaDartBody {
     @Autowired
     DartTbPaDartInsertionLibrary dartTbPaDartInsertionLibrary;
  
-    public void xmlToDb(Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public void xmlToDb(Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         DartTbPaDartDocBodyEntity docBodyEnt = new DartTbPaDartDocBodyEntity();
         DartTbPaDartDocInstEntity instEnt = new DartTbPaDartDocInstEntity();
         DartTbPaDartDocSectionEntity sec1Ent = new DartTbPaDartDocSectionEntity();
         DartTbPaDartDocContentEntity sec1ContEnt = new DartTbPaDartDocContentEntity(); 
         
-        docBodyEnt.setJurirno(masterEnt.getJurirno());
-        docBodyEnt.setDataSeCode(masterEnt.getDataSeCode());
-        docBodyEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        docBodyEnt.setJurirno(docEnt.getJurirno());
+        docBodyEnt.setDataSeCode(docEnt.getDataSeCode());
+        docBodyEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        docBodyEnt.setAtchFileSn(docEnt.getAtchFileSn());
         
         if (XMLUtil.isExistsElement("//BODY/TITLE", xdoc)
                 || XMLUtil.isExistsElement("//BODY/SUBTITLE", xdoc)
@@ -80,23 +82,23 @@ public class DartTbPaDartBody {
                 || XMLUtil.isExistsElement("//BODY/APPENDIX", xdoc)
                 || XMLUtil.isExistsElement("//BODY/LIBRARY", xdoc)) {
             System.out.println("===================================================");
-            System.out.println(dartEntity.getMainXmlFile().getAbsolutePath());
+            System.out.println(dartEntity.getDirPath());
             System.out.println("===================================================");
             
         }
 
         if (XMLUtil.isExistsElement("//BODY/CORRECTION", xdoc)) {
-            int corrContSn = dartTbPaDartCorrection.xmlToDb(XMLUtil.getSingleElement("//BODY/CORRECTION", xdoc), xdoc, dartEntity, histEnt, masterEnt);
+            int corrContSn = dartTbPaDartCorrection.xmlToDb(XMLUtil.getSingleElement("//BODY/CORRECTION", xdoc), xdoc, dartEntity, histEnt, docEnt);
             docBodyEnt.setCorrectionContentSn(corrContSn);
         }
 
         if (XMLUtil.isExistsElement("//BODY/COVER", xdoc)) {
-            int coverContSn = dartTbPaDartCover.xmlToDb(XMLUtil.getSingleElement("//BODY/COVER", xdoc), xdoc, dartEntity, histEnt, masterEnt);
+            int coverContSn = dartTbPaDartCover.xmlToDb(XMLUtil.getSingleElement("//BODY/COVER", xdoc), xdoc, dartEntity, histEnt, docEnt);
             docBodyEnt.setCoverContentSn(coverContSn);            
         }
 
         if (XMLUtil.isExistsElement("//BODY/TOC", xdoc)) {
-            int tocContSn = dartTbPaDartToc.xmlToDb(XMLUtil.getSingleElement("//BODY/TOC", xdoc), xdoc, dartEntity, histEnt, masterEnt);
+            int tocContSn = dartTbPaDartToc.xmlToDb(XMLUtil.getSingleElement("//BODY/TOC", xdoc), xdoc, dartEntity, histEnt, docEnt);
             docBodyEnt.setTocContentSn(tocContSn);        
         }
         
@@ -105,9 +107,9 @@ public class DartTbPaDartBody {
         if (xmlStr.trim().isEmpty() == false) {
             DartTbPaDartDocContentEntity contEnt = new DartTbPaDartDocContentEntity();   
 
-            contEnt.setJurirno(masterEnt.getJurirno());
-            contEnt.setDataSeCode(masterEnt.getDataSeCode());
-            contEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+            contEnt.setJurirno(docEnt.getJurirno());
+            contEnt.setDataSeCode(docEnt.getDataSeCode());
+            contEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
             
             contEnt.setTitle("");
             contEnt.setContent(xmlStr);
@@ -118,24 +120,24 @@ public class DartTbPaDartBody {
         dartTbPaDartDocBodyRepository.save(docBodyEnt);
         
         if (XMLUtil.isExistsElement("//BODY/INSERTION", xdoc)) {
-            instEnt = dartTbPaDartInsertion.xmlToDb(XMLUtil.getSingleElement("//BODY/INSERTION", xdoc), null, null, null, xdoc, dartEntity, histEnt, masterEnt);            
+            instEnt = dartTbPaDartInsertion.xmlToDb(XMLUtil.getSingleElement("//BODY/INSERTION", xdoc), null, null, null, xdoc, dartEntity, histEnt, docEnt);            
         }
 
         // PART
         if (XMLUtil.isExistsElement("//BODY/PART", xdoc)) {
-            dartTbPaDartPart.xmlToDb(XMLUtil.getSingleElement("//BODY/PART", xdoc), null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartPart.xmlToDb(XMLUtil.getSingleElement("//BODY/PART", xdoc), null, xdoc, dartEntity, histEnt, docEnt);
         }
         
         // SECTION-1
         if (XMLUtil.isExistsElement("//BODY/SECTION-1", xdoc)) {
-            dartTbPaDartSection.xmlToDb("SECTION-1", XMLUtil.getSingleElement("//BODY/SECTION-1", xdoc), null, null, null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartSection.xmlToDb("SECTION-1", XMLUtil.getSingleElement("//BODY/SECTION-1", xdoc), null, null, null, xdoc, dartEntity, histEnt, docEnt);
         }
         
         // LIBRARY
         if (XMLUtil.isExistsElement("//BODY/LIBRARY", xdoc)) {
             List<Element> libraryList = XMLUtil.getMultiElements("//BODY/LIBRARY", xdoc);
             for(Element libElem : libraryList) {
-                dartTbPaDartInsertionLibrary.xmlToDb(libElem, instEnt, xdoc, dartEntity, histEnt, masterEnt);
+                dartTbPaDartInsertionLibrary.xmlToDb(libElem, instEnt, xdoc, dartEntity, histEnt, docEnt);
             }
         }
          

@@ -31,6 +31,10 @@ public class DartTbPaDartDocHeaderEntity implements Serializable {
     @Id
     @Column(name="pblntf_data_sn")
     int pblntfDataSn;
+
+    @Id
+    @Column(name="atch_file_sn")
+    int atchFileSn; 
     
     @Column(name="aext_class", length=1, columnDefinition="CHAR")
     private String aextClass;
@@ -56,18 +60,9 @@ public class DartTbPaDartDocHeaderEntity implements Serializable {
     @Column(name="company_name_aregcik")
     private String companyNameAregcik;
     
-    @Column(name="companyname_aaccounttype")
-    private String companynameAaccounttype;
-    
-    @Column(name="extraction")
-    private String extraction;
-    
-    @Column(name="extraction_acode")
-    private String extractionAcode;
-    
-    @Column(name="extraction_afeature")
-    private String extractionAfeature;
-    
+    @Column(name="company_name_aaccounttype")
+    private String companyNameAaccounttype;
+     
     @Column(name="regist_dt")
     private java.time.LocalDateTime registDt = LocalDateTime.now();
         

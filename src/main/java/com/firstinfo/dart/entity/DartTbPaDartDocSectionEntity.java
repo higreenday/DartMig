@@ -34,6 +34,9 @@ public class DartTbPaDartDocSectionEntity implements Serializable {
  
     @Column(name="pblntf_data_sn")
     private int pblntfDataSn;
+ 
+    @Column(name="atch_file_sn")
+    int atchFileSn; 
     
     @Column(name="section_code")
     private String sectionCode; 

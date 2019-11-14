@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstLibEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocPartEntity;
@@ -39,21 +40,23 @@ public class DartTbPaDartPart {
     @Autowired
     DartTbPaDartSection dartTbPaDartSection;
     
-    public DartTbPaDartDocPartEntity xmlToDb(Element partElm, DartTbPaDartDocInstLibEntity instLibEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public DartTbPaDartDocPartEntity xmlToDb(Element partElm, DartTbPaDartDocInstLibEntity instLibEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
 
         DartTbPaDartDocPartEntity partEnt = new DartTbPaDartDocPartEntity();
 
-        partEnt.setJurirno(masterEnt.getJurirno());
-        partEnt.setDataSeCode(masterEnt.getDataSeCode());
-        partEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        partEnt.setJurirno(docEnt.getJurirno());
+        partEnt.setDataSeCode(docEnt.getDataSeCode());
+        partEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        partEnt.setAtchFileSn(docEnt.getAtchFileSn());
  
         String xmlStr = XMLUtil.getContentsFromElem(partElm, "TITLE");
         if (xmlStr.trim().isEmpty() == false) {
             DartTbPaDartDocContentEntity contEnt = new DartTbPaDartDocContentEntity();   
 
-            contEnt.setJurirno(masterEnt.getJurirno());
-            contEnt.setDataSeCode(masterEnt.getDataSeCode());
-            contEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+            contEnt.setJurirno(docEnt.getJurirno());
+            contEnt.setDataSeCode(docEnt.getDataSeCode());
+            contEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+            contEnt.setAtchFileSn(docEnt.getAtchFileSn());
             contEnt.setTitle("");
             contEnt.setContent(xmlStr);
             dartTbPaDartDocContentRepository.save(contEnt);
@@ -74,12 +77,12 @@ public class DartTbPaDartPart {
         
         // SECTION-1
         if (partElm.getChild("SECTION-1") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-1", partElm.getChild("SECTION-1"), partEnt, null, null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartSection.xmlToDb("SECTION-1", partElm.getChild("SECTION-1"), partEnt, null, null, xdoc, dartEntity, histEnt, docEnt);
         }
 
         // INSERTION
         if (partElm.getChild("INSERTION") != null) {
-            dartTbPaDartInsertion.xmlToDb(partElm.getChild("INSERTION"), null, null, partEnt, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartInsertion.xmlToDb(partElm.getChild("INSERTION"), null, null, partEnt, xdoc, dartEntity, histEnt, docEnt);
         }
         
         return partEnt;

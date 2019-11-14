@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstLibEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocPartEntity;
@@ -34,13 +35,14 @@ public class DartTbPaDartSection {
     @Autowired
     DartTbPaDartSection dartTbPaDartSection;
 
-    public DartTbPaDartDocSectionEntity xmlToDb(String sectionCode, Element sectionElm, DartTbPaDartDocPartEntity pPartEnt, DartTbPaDartDocSectionEntity pSectionEnt, DartTbPaDartDocInstLibEntity pInstLibEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public DartTbPaDartDocSectionEntity xmlToDb(String sectionCode, Element sectionElm, DartTbPaDartDocPartEntity pPartEnt, DartTbPaDartDocSectionEntity pSectionEnt, DartTbPaDartDocInstLibEntity pInstLibEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
 
         DartTbPaDartDocSectionEntity sectionEnt = new DartTbPaDartDocSectionEntity();
          
-        sectionEnt.setJurirno(masterEnt.getJurirno());
-        sectionEnt.setDataSeCode(masterEnt.getDataSeCode());
-        sectionEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        sectionEnt.setJurirno(docEnt.getJurirno());
+        sectionEnt.setDataSeCode(docEnt.getDataSeCode());
+        sectionEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        sectionEnt.setAtchFileSn(docEnt.getAtchFileSn());
         sectionEnt.setSectionCode(sectionCode);
         
         if (pPartEnt != null) {
@@ -57,9 +59,10 @@ public class DartTbPaDartSection {
         if (xmlStr.trim().isEmpty() == false) {
             DartTbPaDartDocContentEntity contEnt = new DartTbPaDartDocContentEntity();   
 
-            contEnt.setJurirno(masterEnt.getJurirno());
-            contEnt.setDataSeCode(masterEnt.getDataSeCode());
-            contEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+            contEnt.setJurirno(docEnt.getJurirno());
+            contEnt.setDataSeCode(docEnt.getDataSeCode());
+            contEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+            contEnt.setAtchFileSn(docEnt.getAtchFileSn());
             contEnt.setTitle("");
             contEnt.setContent(xmlStr);
             dartTbPaDartDocContentRepository.save(contEnt);
@@ -75,27 +78,27 @@ public class DartTbPaDartSection {
         
         // SECTION-2
         if (sectionCode.equals("SECTION-1") && sectionElm.getChild("SECTION-2") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-2", sectionElm.getChild("SECTION-2"), null, sectionEnt, null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartSection.xmlToDb("SECTION-2", sectionElm.getChild("SECTION-2"), null, sectionEnt, null, xdoc, dartEntity, histEnt, docEnt);
         }
 
         // SECTION-3
         if (sectionCode.equals("SECTION-2") && sectionElm.getChild("SECTION-3") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-3", sectionElm.getChild("SECTION-3"), null, sectionEnt, null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartSection.xmlToDb("SECTION-3", sectionElm.getChild("SECTION-3"), null, sectionEnt, null, xdoc, dartEntity, histEnt, docEnt);
         }
 
         // SECTION-4
         if (sectionCode.equals("SECTION-3") && sectionElm.getChild("SECTION-4") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-4", sectionElm.getChild("SECTION-4"), null, sectionEnt, null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartSection.xmlToDb("SECTION-4", sectionElm.getChild("SECTION-4"), null, sectionEnt, null, xdoc, dartEntity, histEnt, docEnt);
         }
 
         // SECTION-5
         if (sectionCode.equals("SECTION-4") && sectionElm.getChild("SECTION-5") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-5", sectionElm.getChild("SECTION-5"), null, sectionEnt, null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartSection.xmlToDb("SECTION-5", sectionElm.getChild("SECTION-5"), null, sectionEnt, null, xdoc, dartEntity, histEnt, docEnt);
         }
 
         // SECTION-6
         if (sectionCode.equals("SECTION-5") && sectionElm.getChild("SECTION-6") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-6", sectionElm.getChild("SECTION-6"), null, sectionEnt, null, xdoc, dartEntity, histEnt, masterEnt);
+            dartTbPaDartSection.xmlToDb("SECTION-6", sectionElm.getChild("SECTION-6"), null, sectionEnt, null, xdoc, dartEntity, histEnt, docEnt);
         }
         
         return sectionEnt;

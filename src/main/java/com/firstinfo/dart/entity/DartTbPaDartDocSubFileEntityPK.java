@@ -12,9 +12,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data 
-public class DartTbPaDartDocHeaderEntityPK implements Serializable {
- 
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="TB_PA_DART_DOC")
+public class DartTbPaDartDocSubFileEntityPK implements Serializable {
+
     @Id
     @Column(name="jurirno", length=13, nullable=false) 
     private String jurirno; 
@@ -26,8 +30,11 @@ public class DartTbPaDartDocHeaderEntityPK implements Serializable {
     @Id
     @Column(name="pblntf_data_sn")
     int pblntfDataSn;
- 
+
     @Id
     @Column(name="atch_file_sn")
-    int atchFileSn; 
+    int atchFileSn;
+ 
+        
 }
+

@@ -47,6 +47,8 @@ public class DartUnzipEntity {
     File[] files;
     String mainXmlFileNm;
     
+    ArrayList<String> xmlFiles = new ArrayList<String>();
+    
     public DartUnzipEntity(String dataSeCode, File[] files, String dirPath) throws Exception {
         this.dataSeCode = dataSeCode;
         this.fileNm = (new File(dirPath)).getName();
@@ -95,14 +97,18 @@ public class DartUnzipEntity {
         return files;
     }
     
-    public File getMainXmlFile() {
+    public File getMainXmlFile(int idx) {
         File f = null;
         for(File file : files) {
-            if (file.getName().toLowerCase().equals(mainXmlFileNm.toLowerCase())) {
+            if (file.getName().toLowerCase().equals(xmlFiles.get(idx).toLowerCase())) {
                 f = file;
             }
         }
         return f;
+    }
+    
+    public ArrayList<String> getXmlFiles() {
+        return xmlFiles;
     }
     
     public File getDocumentFile() {
@@ -135,9 +141,12 @@ public class DartUnzipEntity {
         return FileUtils.getContentsAsString(getReceiptFile(), "EUC-KR");
     }
     
-    public String getXmlCont() throws Exception {
-        
-        return FileUtils.getContentsAsString(getMainXmlFile(), "UTF-8");
+    public int getXmlCnt() {
+        return xmlFiles.size();
+    }
+    
+    public String getXmlCont(int idx) throws Exception { 
+      return FileUtils.getContentsAsString(getMainXmlFile(idx), "UTF-8");
     }
     
     public  int getDocumentFileCnt() throws CustException {
@@ -164,9 +173,10 @@ public class DartUnzipEntity {
             if (contArr.length >= 2) {
                 for(int i=1; i < contArr.length; i++) {
                     String[] fileArr = contArr[i].split("/");
-                    fileList.add(fileArr[fileArr.length-1]);
-                    if (fileArr[0].trim().equals("M")) {
-                        mainXmlFileNm = fileArr[fileArr.length-1].trim();
+                    fileList.add(fileArr[7]);
+                    if (fileArr[7].toLowerCase().endsWith("xml") && ( fileArr[0].trim().equals("M") || fileArr[0].trim().equals("A")) ) {
+                        //mainXmlFileNm = fileArr[7].trim();
+                        xmlFiles.add(fileArr[7]);
                     }
                 }
             }
@@ -184,8 +194,10 @@ public class DartUnzipEntity {
             throw new CustException("document file이 없습니다.");
         } else if (getReceiptFile().exists() == false) {
             throw new CustException("receipt file이 없습니다.");
-        } else if (getMainXmlFile().exists() == false) {
+        } else if (xmlFiles == null || xmlFiles.size() == 0) {
             throw new CustException("xml file이 없습니다.");
+//        } else if (getMainXmlFile().exists() == false) {
+//            throw new CustException("xml file이 없습니다.");
         } 
         
         int fileCnt = getDocumentFileCnt();

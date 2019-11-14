@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocInstEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMasterEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMigHistEntity;
@@ -25,14 +26,15 @@ public class DartTbPaDartToc {
     DartTbPaDartDocContentRepository dartTbPaDartDocContentRepository;
 
     
-    public int xmlToDb(Element tocElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public int xmlToDb(Element tocElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         
         String xmlStr = XMLUtil.getContentsFromElem(tocElm, "TITLE");
         DartTbPaDartDocContentEntity tocContEnt = new DartTbPaDartDocContentEntity();
         
-        tocContEnt.setJurirno(masterEnt.getJurirno());
-        tocContEnt.setDataSeCode(masterEnt.getDataSeCode());
-        tocContEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        tocContEnt.setJurirno(docEnt.getJurirno());
+        tocContEnt.setDataSeCode(docEnt.getDataSeCode());
+        tocContEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        tocContEnt.setAtchFileSn(docEnt.getAtchFileSn());
         
         tocContEnt.setTitle(XMLUtil.getChildText("TITLE", tocElm));
         tocContEnt.setTitleAclass(XMLUtil.getChildAttrStr("TITLE", "ACLASS", tocElm));

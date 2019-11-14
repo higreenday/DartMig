@@ -1,10 +1,13 @@
 package com.firstinfo.dart.job.xml;
 
+import java.util.List;
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service; 
+import org.springframework.stereotype.Service;
 
+import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocHeaderEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMasterEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMigHistEntity;
@@ -19,13 +22,17 @@ public class DartTbPaDartDocHeader {
     @Autowired
     DartTbPaDartDocHeaderRepository dartTbPaDartDocHeaderRepository;
 
+    @Autowired
+    DartTbPaDartDocHeaderSumy dartTbPaDartDocHeaderSumy;
+
     
-    public void xmlToDb(Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartMasterEntity masterEnt) throws Exception {
+    public void xmlToDb(Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         DartTbPaDartDocHeaderEntity docHeaderEnt = new DartTbPaDartDocHeaderEntity();
         
-        docHeaderEnt.setJurirno(masterEnt.getJurirno());
-        docHeaderEnt.setDataSeCode(masterEnt.getDataSeCode());
-        docHeaderEnt.setPblntfDataSn(masterEnt.getPblntfDataSn());
+        docHeaderEnt.setJurirno(docEnt.getJurirno());
+        docHeaderEnt.setDataSeCode(docEnt.getDataSeCode());
+        docHeaderEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
+        docHeaderEnt.setAtchFileSn(docEnt.getAtchFileSn());
         
         if (XMLUtil.isExistsElement("//DOCUMENT-HEADER", xdoc)) {
             Element docHeaderElm = XMLUtil.getSingleElement("//DOCUMENT-HEADER", xdoc);
@@ -37,10 +44,13 @@ public class DartTbPaDartDocHeader {
             docHeaderEnt.setFomulaVersionSubver(XMLUtil.getChildAttrStr("FORMULA-VERSION", "SUBVER", docHeaderElm));
             docHeaderEnt.setCompanyName(XMLUtil.getChildText("COMPANY-NAME", docHeaderElm));
             docHeaderEnt.setCompanyNameAregcik(XMLUtil.getChildAttrStr("COMPANY-NAME", "AREGCIK", docHeaderElm));
-            docHeaderEnt.setCompanynameAaccounttype(XMLUtil.getChildAttrStr("COMPANY-NAME", "AACCOUNTTYPE", docHeaderElm));
-            docHeaderEnt.setExtraction(XMLUtil.getChildText("EXTRACTION", docHeaderElm));
-            docHeaderEnt.setExtractionAcode(XMLUtil.getChildAttrStr("EXTRACTION", "ACODE", docHeaderElm));
-            docHeaderEnt.setExtractionAfeature(XMLUtil.getChildAttrStr("EXTRACTION", "AFEATURE", docHeaderElm));
+            docHeaderEnt.setCompanyNameAaccounttype(XMLUtil.getChildAttrStr("COMPANY-NAME", "AACCOUNTTYPE", docHeaderElm));
+            
+            // summary 저장
+            if (docHeaderElm.getChild("SUMMARY") != null) {
+                List<Element> summaryList = docHeaderElm.getChildren("SUMMARY");
+                dartTbPaDartDocHeaderSumy.xmlToDb(summaryList, xdoc, dartEntity, histEnt, docEnt);
+            }
         }
         
         
