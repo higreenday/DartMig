@@ -3,6 +3,7 @@ package com.firstinfo.dart.job.xml;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.firstinfo.dart.entity.DartTbPaDartDocBodyEntity;
@@ -19,12 +20,14 @@ import com.firstinfo.dart.repo.DartTbPaDartDocContentRepository;
 import com.firstinfo.dart.repo.DartTbPaDartDocInstRepository;
 import com.firstinfo.dart.repo.DartTbPaDartDocSectionRepository;
 
-@Service
+@Component
 public class DartTbPaDartCover {
 
     @Autowired
     DartTbPaDartDocContentRepository dartTbPaDartDocContentRepository;
-
+ 
+    @Autowired
+    ClobUpdate clobUpdate; 
     
     public int xmlToDb(Element coverElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         
@@ -44,8 +47,10 @@ public class DartTbPaDartCover {
         coverContEnt.setTitleAunitvalue(XMLUtil.getChildAttrStr("COVER-TITLE", "AUNITVALUE", coverElm));
         coverContEnt.setPgbrk(XMLUtil.getChildAttrStr("COVER-TITLE", "PGBRK", coverElm));
         coverContEnt.setPgbrkAnumber(XMLUtil.getChildAttrStr("COVER-TITLE", "PGBRK_ANUMBER", coverElm));
-        coverContEnt.setContent(xmlStr);
+        //coverContEnt.setContent(xmlStr);
         dartTbPaDartDocContentRepository.save(coverContEnt);
+
+        clobUpdate.updateClob(xmlStr, coverContEnt.getContentSn());
         
         return coverContEnt.getContentSn();
     }

@@ -34,7 +34,7 @@ public class DartTbPaDartInsertion {
     @Autowired
     DartTbPaDartInsertionLibrary dartTbPaDartInsertionLibrary;
     
-    public DartTbPaDartDocInstEntity xmlToDb(Element instElm, DartTbPaDartDocInstEntity pInstEnt, DartTbPaDartDocInstLibEntity instLibEnt, DartTbPaDartDocPartEntity partEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
+    public DartTbPaDartDocInstEntity xmlToDb(Element instElm, DartTbPaDartDocInstEntity pInstEnt, DartTbPaDartDocInstLibEntity instLibEnt, DartTbPaDartDocPartEntity partEnt, DartTbPaDartDocSectionEntity sectionEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
 
         DartTbPaDartDocInstEntity instEnt = new DartTbPaDartDocInstEntity();
         
@@ -53,6 +53,10 @@ public class DartTbPaDartInsertion {
         
         if (partEnt != null) {
             instEnt.setPPartSn(partEnt.getPartSn());
+        }
+        
+        if (sectionEnt != null) {
+            instEnt.setPSectionSn(sectionEnt.getSectionSn());
         }
          
         instEnt.setAbasisnumber(XMLUtil.getAttrStr("ABASISNUMBER", instElm));

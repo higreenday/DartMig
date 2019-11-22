@@ -1,5 +1,7 @@
 package com.firstinfo.dart.job.xml;
 
+import java.util.List;
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,7 @@ public class DartTbPaDartInsertionLibrary {
             contEnt.setDataSeCode(docEnt.getDataSeCode());
             contEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
             contEnt.setAtchFileSn(docEnt.getAtchFileSn());
-            contEnt.setTitle("");
+            contEnt.setTitle(XMLUtil.getChildText("TITLE", instLibElm));
             contEnt.setContent(xmlStr);
             dartTbPaDartDocContentRepository.save(contEnt);
             instLibEnt.setContentSn(contEnt.getContentSn());
@@ -87,32 +89,50 @@ public class DartTbPaDartInsertionLibrary {
         
         // SECTION-1
         if (instLibElm.getChild("SECTION-1") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-1", instLibElm.getChild("SECTION-1"), null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            List<Element> sectionList = instLibElm.getChildren("SECTION-1");
+            for(Element secElm : sectionList) {
+                dartTbPaDartSection.xmlToDb("SECTION-1", secElm, null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            }              
         }
         
         // SECTION-2
         if (instLibElm.getChild("SECTION-2") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-2", instLibElm.getChild("SECTION-2"), null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            List<Element> sectionList = instLibElm.getChildren("SECTION-2");
+            for(Element secElm : sectionList) {
+                dartTbPaDartSection.xmlToDb("SECTION-2", secElm, null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            }              
         }
         
         // SECTION-3
         if (instLibElm.getChild("SECTION-3") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-3", instLibElm.getChild("SECTION-3"), null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            List<Element> sectionList = instLibElm.getChildren("SECTION-3");
+            for(Element secElm : sectionList) {
+                dartTbPaDartSection.xmlToDb("SECTION-3", secElm, null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            }              
         }
         
         // SECTION-4
         if (instLibElm.getChild("SECTION-4") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-4", instLibElm.getChild("SECTION-4"), null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            List<Element> sectionList = instLibElm.getChildren("SECTION-4");
+            for(Element secElm : sectionList) {
+                dartTbPaDartSection.xmlToDb("SECTION-4", secElm, null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            }              
         }
         
         // SECTION-5
         if (instLibElm.getChild("SECTION-5") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-5", instLibElm.getChild("SECTION-5"), null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            List<Element> sectionList = instLibElm.getChildren("SECTION-5");
+            for(Element secElm : sectionList) {
+                dartTbPaDartSection.xmlToDb("SECTION-5", secElm, null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            }              
         }
         
         // SECTION-6
         if (instLibElm.getChild("SECTION-6") != null) {
-            dartTbPaDartSection.xmlToDb("SECTION-6", instLibElm.getChild("SECTION-6"), null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            List<Element> sectionList = instLibElm.getChildren("SECTION-6");
+            for(Element secElm : sectionList) {
+                dartTbPaDartSection.xmlToDb("SECTION-6", secElm, null, null, instLibEnt, xdoc, dartEntity, histEnt, docEnt);
+            }              
         }
         
         // CORRECTION
@@ -124,7 +144,10 @@ public class DartTbPaDartInsertionLibrary {
         
         // INSERTION
         if (instLibElm.getChild("INSERTION") != null) {
-            dartTbPaDartInsertion.xmlToDb(instLibElm.getChild("INSERTION"), null, instLibEnt, null, xdoc, dartEntity, histEnt, docEnt);
+            List<Element> insertionList = instLibElm.getChildren("INSERTION");
+            for(Element insElem : insertionList) {
+                instEnt = dartTbPaDartInsertion.xmlToDb(insElem, null, instLibEnt, null, null, xdoc, dartEntity, histEnt, docEnt);
+            }             
         }
         
         return instLibEnt;

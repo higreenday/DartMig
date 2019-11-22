@@ -51,7 +51,7 @@ public class DartTbPaDartDocEntity implements Serializable {
     @Column(name="cnnc_at", length=1, columnDefinition="CHAR")
     private String cnncAt;
     
-    @Column(name="bsns_year", length=4, columnDefinition="CHAR")
+    @Column(name="bsns_year")
     private String bsnsYear;
  
     @Column(name="doc_code") 

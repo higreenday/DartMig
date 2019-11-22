@@ -82,7 +82,7 @@ public class DartTbPaDartPart {
 
         // INSERTION
         if (partElm.getChild("INSERTION") != null) {
-            dartTbPaDartInsertion.xmlToDb(partElm.getChild("INSERTION"), null, null, partEnt, xdoc, dartEntity, histEnt, docEnt);
+            dartTbPaDartInsertion.xmlToDb(partElm.getChild("INSERTION"), null, null, partEnt, null, xdoc, dartEntity, histEnt, docEnt);
         }
         
         return partEnt;

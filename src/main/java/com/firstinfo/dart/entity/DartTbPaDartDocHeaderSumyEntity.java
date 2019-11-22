@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="TB_PA_DART_DOC_HEADER")
+@Table(name="TB_PA_DART_DOC_HEADER_SUMY")
 @IdClass(DartTbPaDartDocHeaderSumyEntityPK.class)
 public class DartTbPaDartDocHeaderSumyEntity implements Serializable {
  

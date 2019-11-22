@@ -34,24 +34,39 @@ spring:
   aop :
     proxy-target-class : true
   datasource :
-#    url : jdbc:Altibase://220.76.91.27:20301/gongsidb
-#    username : gongsi
-#    password : gongsi
+  # altibase
+    url : jdbc:Altibase://220.76.91.27:20301/gongsidb
+    username : gongsi
+    password : gongsi
+    driver-class-name : Altibase.jdbc.driver.AltibaseDriver
+
+  # oracle
+#    url : jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11
+#    username : tuser
+#    password : tuser01..
+#    driver-class-name : oracle.jdbc.driver.OracleDriver
+  
+#    url : jdbc:log4jdbc:Altibase://220.76.91.27:20301/gongsidb
 #    driver-class-name : Altibase.jdbc.driver.AltibaseDriver
 #    url : jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11
-    url : jdbc:log4jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11 
-    username : tuser
-    password : tuser01..
-    driver-class-name : net.sf.log4jdbc.sql.jdbcapi.DriverSpy  
+#    url : jdbc:log4jdbc:oracle:thin:@//202.68.235.14:1522/ORCL11 
+#    username : tuser
+#    password : tuser01..
+#    driver-class-name : net.sf.log4jdbc.sql.jdbcapi.DriverSpy  
 #    driver-class-name : oracle.jdbc.driver.OracleDriver
+#    driver-class-name : Altibase.jdbc.driver.AltibaseDriver
     hikari:
       connection-test-query: select 1 from dual
   
   jpa:
     hibernate:
       ddl-auto: none 
-      use-new-id-generator-mappings: false
+      use-new-id-generator-mappings: false 
     generate-ddl: false
     database: ORACLE
     show-sql: true
-     
+    properties: 
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+   

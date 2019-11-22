@@ -33,9 +33,13 @@ public class DartUnzipEntity {
     String receiptRceptNo; 
     String receiptReachNo;
     String receiptJobCode;
+    String receiptJobName;
     String receiptReportCode;
+    String receiptReportName;
     String receiptPblntfTrgetCmpnyEsntlNo;
     String receiptJurirno;
+    String receiptCompanyName;
+    String receiptPresentnName;
     String receiptPresentnEsntlNo;
     String receiptRceptDt;
     String receiptUpdtTrgetRceptDt;
@@ -74,20 +78,44 @@ public class DartUnzipEntity {
         }
         
         String receptCont = this.getReceiptCont();
-        this.receiptPresentnSe = receptCont.substring(0,1).trim();
-        this.receiptJobBeginNo = receptCont.substring(1,15).trim();
-        this.receiptRceptNo = receptCont.substring(15,29).trim();
-        this.receiptReachNo = receptCont.substring(29,43).trim();
-        this.receiptJobCode = receptCont.substring(43,48).trim();
-        this.receiptReportCode = receptCont.substring(48,53).trim();
-        this.receiptPblntfTrgetCmpnyEsntlNo = receptCont.substring(53,61).trim();
-        this.receiptJurirno = receptCont.substring(61,74).trim();
-        this.receiptPresentnEsntlNo = receptCont.substring(74,82).trim();
-        this.receiptRceptDt = receptCont.substring(82,96).trim();
-        this.receiptUpdtTrgetRceptDt = receptCont.substring(96,110).trim();
-        this.receiptTodayRceptSe = receptCont.substring(110,111).trim();
-        this.receiptCdpnyPblntfSe = receptCont.substring(111,112).trim();
-        this.receiptAditReprtNm = receptCont.substring(112).trim();
+        if (receptCont.indexOf("||") > 0) {
+            String[] receptArr = receptCont.split("\\|\\|");
+            this.receiptPresentnSe = receptArr[0];                  // 제출구분
+            this.receiptJobBeginNo = receptArr[1];                  // 업무시작번호
+            this.receiptRceptNo = receptArr[2];                  // 접수번호
+            this.receiptReachNo = receptArr[3];                  // 도달번호
+            this.receiptJobCode = receptArr[4];                  // 업무코드
+            this.receiptJobName = receptArr[5];                  // 업무명
+            this.receiptReportCode = receptArr[6];                  // 보고서코드
+            this.receiptReportName = receptArr[7];                  // 보고서명
+            this.receiptPblntfTrgetCmpnyEsntlNo = receptArr[8];                  // 공시대상회사 고유번호
+            this.receiptJurirno = receptArr[9];                  // 법인등록번호
+            this.receiptCompanyName = receptArr[10];                  // 회사명
+            this.receiptPresentnName = receptArr[11];                  // 제출인명
+            this.receiptRceptDt = receptArr[12];                  // 접수일시
+            this.receiptUpdtTrgetRceptDt = receptArr[13];                  // 정정대상 접수번호
+            this.receiptTodayRceptSe = receptArr[14];                  // 당일접수여부
+            this.receiptCdpnyPblntfSe = receptArr[15];                  // 자회사공시여부
+            if (receptArr.length > 16) {
+                this.receiptAditReprtNm = receptArr[16];                  // 추가보고서명
+            }
+
+        } else {
+            this.receiptPresentnSe = receptCont.substring(0,1).trim();                      // 제출구분
+            this.receiptJobBeginNo = receptCont.substring(1,15).trim();                     // 업무시작번호
+            this.receiptRceptNo = receptCont.substring(15,29).trim();                       // 접수번호
+            this.receiptReachNo = receptCont.substring(29,43).trim();                       // 도달번호
+            this.receiptJobCode = receptCont.substring(43,48).trim();                       // 업무코드
+            this.receiptReportCode = receptCont.substring(48,53).trim();                    // 보고서코드
+            this.receiptPblntfTrgetCmpnyEsntlNo = receptCont.substring(53,61).trim();       // 공시대상회사 고유번호
+            this.receiptJurirno = receptCont.substring(61,74).trim();                       // 법인등록번호
+            this.receiptPresentnEsntlNo = receptCont.substring(74,82).trim();               // 제출인 고유번호
+            this.receiptRceptDt = receptCont.substring(82,96).trim();                       // 접수일시
+            this.receiptUpdtTrgetRceptDt = receptCont.substring(96,110).trim();             // 정정대상 접수번호
+            this.receiptTodayRceptSe = receptCont.substring(110,111).trim();                // 당일접수여부
+            this.receiptCdpnyPblntfSe = receptCont.substring(111,112).trim();               // 자회사공시여부
+            this.receiptAditReprtNm = receptCont.substring(112).trim();                     // 추가보고서명
+        }
         
         getDocumentFileList();
         
@@ -167,6 +195,7 @@ public class DartUnzipEntity {
     
     public  ArrayList<String> getDocumentFileList() throws CustException {
         ArrayList<String> fileList = new ArrayList<String>();
+        xmlFiles.clear();
         try {
             String cont = getDocumentCont();
             String[] contArr = cont.split("\n");

@@ -20,7 +20,7 @@ public class Util {
         ZipInputStream zis = new ZipInputStream(new FileInputStream(fileZip), Charset.forName("EUC-KR"));
         ZipEntry zipEntry = zis.getNextEntry();
         while (zipEntry != null) {
-            File newFile = newFile(destDir, zipEntry);
+            File newFile = newFile(destDir, zipEntry); 
             FileOutputStream fos = new FileOutputStream(newFile);
             int len;
             while ((len = zis.read(buffer)) > 0) {
@@ -38,7 +38,9 @@ public class Util {
     
     public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
         File destFile = new File(destinationDir, zipEntry.getName());
-         
+        if (destFile.getParentFile().exists() == false) {
+            destFile.getParentFile().mkdirs();
+        }
         String destDirPath = destinationDir.getCanonicalPath();
         String destFilePath = destFile.getCanonicalPath();
          

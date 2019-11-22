@@ -50,14 +50,26 @@ public class DartTbPaDartReceiptEntity implements Serializable {
     @Column(name="job_code")
     private String jobCode;
     
+    @Column(name="job_name")
+    private String jobName;
+    
     @Column(name="report_code")
     private String reportCode;
+    
+    @Column(name="report_name")
+    private String reportName;
      
     @Column(name="pblntf_trget_cmpny_esntl_no") 
     private String pblntfTrgetCmpnyEsntlNo;
  
     @Column(name="presentn_esntl_no") 
     private String presentnEsntlNo; 
+ 
+    @Column(name="company_name") 
+    private String companyName; 
+ 
+    @Column(name="presentn_name") 
+    private String presentnName; 
  
     @Column(name="rcept_dt") 
     private String rceptDt; 

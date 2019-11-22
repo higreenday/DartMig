@@ -45,6 +45,9 @@ public class DartTbPaDartDocInstEntity implements Serializable {
  
     @Column(name="p_part_sn")
     private int pPartSn; 
+ 
+    @Column(name="p_section_sn")
+    private int pSectionSn; 
     
     @Column(name="abasisnumber") 
     private String abasisnumber; 

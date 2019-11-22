@@ -102,6 +102,7 @@ public class DartMig {
         masterEnt.setSendDe(dartEntity.getSendDe());
         masterEnt.setDataSn(dartEntity.getDataSn());
         masterEnt.setMrktSe(dartEntity.getMrktSe());
+        masterEnt.setMigHistSn(histEnt.getMigHistSn());
         masterEnt.setPblntfTy(dartEntity.getPblntfTy());
         masterEnt.setReachNo(dartEntity.getReachNo());
         masterEnt.setReportCode(dartEntity.getReportCode());
@@ -140,8 +141,8 @@ public class DartMig {
             if (docArr.length > 7) {
                 for(int j=0; j < ((docArr.length-7)/2); j++) {
                     // 서브 파일 목록 저장
-                    String fileNm = docArr[8+(j*2)].split("\\")[1];
-                    String folderNm = docArr[8+(j*2)].split("\\")[0];
+                    String fileNm = docArr[8+(j*2)].split("\\\\")[1];
+                    String folderNm = docArr[8+(j*2)].split("\\\\")[0];
                     DartTbPaDartDocSubFileEntity subFileEnt = new DartTbPaDartDocSubFileEntity();
                     subFileEnt.setJurirno(dartEntity.getReceiptJurirno());
                     subFileEnt.setDataSeCode(dartEntity.getDataSeCode());
@@ -167,9 +168,13 @@ public class DartMig {
         receiptEnt.setRceptNo(dartEntity.getReceiptRceptNo()); 
         receiptEnt.setReachNo(dartEntity.getReceiptReachNo());
         receiptEnt.setJobCode(dartEntity.getReceiptJobCode());
+        receiptEnt.setJobName(dartEntity.getReceiptJobName());
         receiptEnt.setReportCode(dartEntity.getReceiptReportCode());
+        receiptEnt.setReportName(dartEntity.getReceiptReportName());
         receiptEnt.setPblntfTrgetCmpnyEsntlNo(dartEntity.getReceiptPblntfTrgetCmpnyEsntlNo()); 
         receiptEnt.setPresentnEsntlNo(dartEntity.getReceiptPresentnEsntlNo());
+        receiptEnt.setPresentnName(dartEntity.getReceiptPresentnName());
+        receiptEnt.setCompanyName(dartEntity.getReceiptCompanyName());
         receiptEnt.setRceptDt(dartEntity.getReceiptRceptDt());
         receiptEnt.setUpdtTrgetRceptDt(dartEntity.getReceiptUpdtTrgetRceptDt());
         receiptEnt.setTodayRceptSe(dartEntity.getReceiptTodayRceptSe());

@@ -51,18 +51,18 @@ public class XMLUtil {
 
     public static String getContentsFromElem(Element elm, String removeChildNode) throws Exception {
         Element cloneElem = elm.clone();
-        cloneElem.removeChild(removeChildNode);
-        cloneElem.removeChild("FILENAME");
-        cloneElem.removeChild("PART");
-        cloneElem.removeChild("SECTION-1");
-        cloneElem.removeChild("SECTION-2");
-        cloneElem.removeChild("SECTION-3");
-        cloneElem.removeChild("SECTION-4");
-        cloneElem.removeChild("SECTION-5");
-        cloneElem.removeChild("SECTION-6");
-        cloneElem.removeChild("CORRECTION");
-        cloneElem.removeChild("PGBRK");
-        cloneElem.removeChild("INSERTION"); 
+        cloneElem.removeChildren(removeChildNode);
+        cloneElem.removeChildren("FILENAME");
+        cloneElem.removeChildren("PART");
+        cloneElem.removeChildren("SECTION-1");
+        cloneElem.removeChildren("SECTION-2");
+        cloneElem.removeChildren("SECTION-3");
+        cloneElem.removeChildren("SECTION-4");
+        cloneElem.removeChildren("SECTION-5");
+        cloneElem.removeChildren("SECTION-6");
+        cloneElem.removeChildren("CORRECTION");
+        cloneElem.removeChildren("PGBRK");
+        cloneElem.removeChildren("INSERTION"); 
         XMLOutputter xmlout = new XMLOutputter(Format.getPrettyFormat());
         return xmlout.outputString(cloneElem.getChildren());
     }
