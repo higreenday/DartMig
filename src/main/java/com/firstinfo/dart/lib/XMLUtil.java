@@ -60,9 +60,16 @@ public class XMLUtil {
         cloneElem.removeChildren("SECTION-4");
         cloneElem.removeChildren("SECTION-5");
         cloneElem.removeChildren("SECTION-6");
-        cloneElem.removeChildren("CORRECTION");
-        cloneElem.removeChildren("PGBRK");
+        cloneElem.removeChildren("CORRECTION"); 
         cloneElem.removeChildren("INSERTION"); 
+        cloneElem.removeChildren("COVER"); 
+        cloneElem.removeChildren("TOC");
+        cloneElem.removeChildren("PART");
+        cloneElem.removeChildren("TITLE");
+        cloneElem.removeChildren("SUBTITLE");
+        cloneElem.removeChildren("CAUTION");
+        cloneElem.removeChildren("WARNING");
+        cloneElem.removeChildren("LIBRARY");
         XMLOutputter xmlout = new XMLOutputter(Format.getPrettyFormat());
         return xmlout.outputString(cloneElem.getChildren());
     }

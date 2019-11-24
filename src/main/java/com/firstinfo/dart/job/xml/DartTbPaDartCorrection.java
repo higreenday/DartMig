@@ -24,11 +24,7 @@ public class DartTbPaDartCorrection {
 
     @Autowired
     DartTbPaDartDocContentRepository dartTbPaDartDocContentRepository;
-
-    @Autowired
-    ClobUpdate clobUpdate;
-
-    
+ 
     public int xmlToDb(Element corrElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
          
         DartTbPaDartDocContentEntity corrContEnt = new DartTbPaDartDocContentEntity();            
@@ -40,10 +36,9 @@ public class DartTbPaDartCorrection {
         corrContEnt.setAtchFileSn(docEnt.getAtchFileSn());
         
         corrContEnt.setTitle(XMLUtil.getChildText("TITLE", corrElm));
-        //corrContEnt.setContent(xmlStr);
+        corrContEnt.setContent(xmlStr);
         dartTbPaDartDocContentRepository.save(corrContEnt);
         
-        clobUpdate.updateClob(xmlStr, corrContEnt.getContentSn());
         return corrContEnt.getContentSn();
     }
 }

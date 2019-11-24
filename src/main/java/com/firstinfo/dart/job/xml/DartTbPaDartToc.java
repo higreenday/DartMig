@@ -25,7 +25,6 @@ public class DartTbPaDartToc {
     @Autowired
     DartTbPaDartDocContentRepository dartTbPaDartDocContentRepository;
 
-    
     public int xmlToDb(Element tocElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         
         String xmlStr = XMLUtil.getContentsFromElem(tocElm, "TITLE");
@@ -46,7 +45,7 @@ public class DartTbPaDartToc {
         tocContEnt.setPgbrkAnumber(XMLUtil.getChildAttrStr("TITLE", "PGBRK_ANUMBER", tocElm));
         tocContEnt.setContent(xmlStr);
         dartTbPaDartDocContentRepository.save(tocContEnt);
-        
+
         return tocContEnt.getContentSn();
     }
 }

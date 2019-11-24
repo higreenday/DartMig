@@ -25,9 +25,7 @@ public class ClobUpdate {
     
     public void updateClob(String clob, int contentSn) throws SQLException {
 
-        Connection conn =null;
-
-        Session session = (Session) entityManager.getDelegate();
+        Session session = entityManager.unwrap(Session.class);
         
         session.doWork(new Work() {
             
@@ -44,9 +42,11 @@ public class ClobUpdate {
                     pstmt.setCharacterStream(colIndex++, sr, clob.length() );
                     pstmt.setInt(colIndex++, contentSn);
                     int i=pstmt.executeUpdate();
+                    System.out.println("update cnt:" + i + ":" + contentSn);
                 }catch(SQLException se){
                     se.printStackTrace();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 } finally {
                     if (pstmt != null) { try { pstmt.close(); } catch (Exception ex) {}}
                 }

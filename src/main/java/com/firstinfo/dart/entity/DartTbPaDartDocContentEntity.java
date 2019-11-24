@@ -62,6 +62,7 @@ public class DartTbPaDartDocContentEntity implements Serializable {
     private String pgbrkAnumber;
 
     @Column(name="content", length=365600, columnDefinition="CLOB")
+    @Lob
     private String content;
     
     @Column(name="regist_dt")

@@ -114,6 +114,8 @@ public class DartJob {
                         if (isProdYn.equals("Y")) {
                             FileUtils.moveFile(receiveFile, new File(dartReceiveOkPath + "/" + receiveFile.getName()));
                             FileUtils.moveDirectory(new File(dartReceivePath + "/" + extractFolderNm), new File(dartReceiveOkExtPath + "/" + extractFolderNm));
+                        } else {
+                            FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
                         }
                         CD.bizlog.info(migSeGbn + " MIG SUCCESS : " + receiveFile.getName());
                     } catch (CustException ex) {
@@ -123,6 +125,8 @@ public class DartJob {
                         if (isProdYn.equals("Y")) {
                             FileUtils.moveFile(receiveFile, new File(dartReceiveErrPath + "/" + receiveFile.getName()));
                             FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
+                        } else {
+                            FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
                         }
                     } catch (Exception ex) {
                         histEnt.setMigResultCode("0");
@@ -130,6 +134,8 @@ public class DartJob {
                         CD.bizlog.info(migSeGbn + " MIG ERROR : " + receiveFile.getName() +"\n" + ExceptionUtils.getFullStackTrace(ex));
                         if (isProdYn.equals("Y")) {
                             FileUtils.moveFile(receiveFile, new File(dartReceiveErrPath + "/" + receiveFile.getName()));
+                            FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
+                        } else {
                             FileUtils.deleteDirectory(new File(dartReceivePath + "/" + extractFolderNm));
                         }
                     } finally { 

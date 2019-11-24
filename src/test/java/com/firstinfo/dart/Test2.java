@@ -32,7 +32,7 @@ public class Test2 {
               int i = 0;
            
               while (sRS.next()) {
-                  System.out.println("    FETCH # " + (++i));
+                  //System.out.println("    FETCH # " + (++i));
            
                   try {
                       int sReadSize = 0;
@@ -45,8 +45,10 @@ public class Test2 {
                       while ((sReadSize = sReader.read(sBuf)) > 0) {
                           sBuffer.append(sBuf, 0, sReadSize);
                       }
-                      System.out.println(sBuffer);
-                      System.out.println("************");
+                      if (sBuffer.length() > 100) {
+                      System.out.println(sBuffer.length());
+                      }
+                      //System.out.println("************");
                   } catch (Exception e) {
                       System.out.println("ERROR MESSAGE : " + e.getMessage());
                       e.printStackTrace();

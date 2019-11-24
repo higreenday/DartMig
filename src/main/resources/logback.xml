@@ -5,6 +5,17 @@
     </encoder>
   </appender>
   
+  <appender name="CHKXML" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/Users/higreenday/mdev/mir_project/dart/mig/chk/chk_xml.log</file> 
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH_NAME}.%d{yyyyMMdd}</fileNamePattern>
+            <maxHistory>60</maxHistory>  
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-3level %logger{5} %F %L - %msg %n</pattern>
+        </encoder>
+    </appender>
+  
   <logger name="jdbc" level="OFF"/>
   
   <logger name="jdbc.sqlonly" level="OFF"/>
@@ -14,6 +25,10 @@
   <logger name="jdbc.resultsettable" level="DEBUG"/>
   <logger name="jdbc.connection" level="OFF"/>
   <logger name="biz" level="DEBUG"/>
+  <logger name="chk_xml" level="DEBUG">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="CHKXML" />
+  </logger>
   
   <root level="INFO">
     <appender-ref ref="STDOUT" />

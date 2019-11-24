@@ -7,19 +7,12 @@ import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.firstinfo.dart.entity.DartTbPaDartDocContentEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocEntity;
-import com.firstinfo.dart.entity.DartTbPaDartDocFileEntity;
-import com.firstinfo.dart.entity.DartTbPaDartDocHeaderEntity;
 import com.firstinfo.dart.entity.DartTbPaDartDocHeaderSumyEntity;
-import com.firstinfo.dart.entity.DartTbPaDartDocInstLibEntity;
-import com.firstinfo.dart.entity.DartTbPaDartMasterEntity;
 import com.firstinfo.dart.entity.DartTbPaDartMigHistEntity;
 import com.firstinfo.dart.entity.DartUnzipEntity;
 import com.firstinfo.dart.lib.XMLUtil;
-import com.firstinfo.dart.repo.DartTbPaDartDocHeaderRepository;
 import com.firstinfo.dart.repo.DartTbPaDartDocHeaderSumyRepository;
-import com.firstinfo.dart.repo.DartTbPaDartMasterRepository;
 
 @Service
 public class DartTbPaDartDocHeaderSumy {

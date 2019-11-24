@@ -26,9 +26,6 @@ public class DartTbPaDartCover {
     @Autowired
     DartTbPaDartDocContentRepository dartTbPaDartDocContentRepository;
  
-    @Autowired
-    ClobUpdate clobUpdate; 
-    
     public int xmlToDb(Element coverElm, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
         
         String xmlStr = XMLUtil.getContentsFromElem(coverElm, "COVER-TITLE");
@@ -47,11 +44,9 @@ public class DartTbPaDartCover {
         coverContEnt.setTitleAunitvalue(XMLUtil.getChildAttrStr("COVER-TITLE", "AUNITVALUE", coverElm));
         coverContEnt.setPgbrk(XMLUtil.getChildAttrStr("COVER-TITLE", "PGBRK", coverElm));
         coverContEnt.setPgbrkAnumber(XMLUtil.getChildAttrStr("COVER-TITLE", "PGBRK_ANUMBER", coverElm));
-        //coverContEnt.setContent(xmlStr);
+        coverContEnt.setContent(xmlStr);
         dartTbPaDartDocContentRepository.save(coverContEnt);
 
-        clobUpdate.updateClob(xmlStr, coverContEnt.getContentSn());
-        
         return coverContEnt.getContentSn();
     }
 }

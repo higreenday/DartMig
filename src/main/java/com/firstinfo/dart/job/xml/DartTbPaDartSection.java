@@ -1,7 +1,15 @@
 package com.firstinfo.dart.job.xml;
 
+import java.io.StringReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +49,7 @@ public class DartTbPaDartSection {
     DartTbPaDartInsertion dartTbPaDartInsertion;
 
     @Autowired
-    ClobUpdate clobUpdate; 
+    private EntityManager entityManager;
     
     public DartTbPaDartDocSectionEntity xmlToDb(String sectionCode, Element sectionElm, DartTbPaDartDocPartEntity pPartEnt, DartTbPaDartDocSectionEntity pSectionEnt, DartTbPaDartDocInstLibEntity pInstLibEnt, Document xdoc, DartUnzipEntity dartEntity, DartTbPaDartMigHistEntity histEnt, DartTbPaDartDocEntity docEnt) throws Exception {
 
@@ -72,11 +80,10 @@ public class DartTbPaDartSection {
             contEnt.setPblntfDataSn(docEnt.getPblntfDataSn());
             contEnt.setAtchFileSn(docEnt.getAtchFileSn());
             contEnt.setTitle(XMLUtil.getChildText("TITLE", sectionElm));
-            //contEnt.setContent(xmlStr);
+            contEnt.setContent(xmlStr);
             dartTbPaDartDocContentRepository.save(contEnt);
             sectionEnt.setContentSn(contEnt.getContentSn());
-
-            clobUpdate.updateClob(xmlStr, contEnt.getContentSn());
+             
         } 
 
         sectionEnt.setAid(XMLUtil.getAttrStr("AID", sectionElm));
